@@ -18,4 +18,4 @@ jobs:
 
     - name: Lint YAML files
       working-directory: src
-      run: yamllint .
+      run: yamllint -c ../.yamllint .
