@@ -2,20 +2,22 @@ name: Lint YAML
 on: [pull_request]
 
 jobs:
-  generate:
+  lint:
     runs-on: ubuntu-latest
     steps:
     - name: Check out repo
       uses: actions/checkout@v3
 
     - name: Set up Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v3
       with:
         python-version: 3.8
 
     - name: Install yamllint
-      run: pip install yamllint
+      run: |-
+        pip3 install --user wheel 
+        pip3 install --user yamllint==1.26.3
 
     - name: Lint YAML files
       working-directory: src
-      run: yamllint -c ../.yamllint .
+      run: yamllint --format parsable .
